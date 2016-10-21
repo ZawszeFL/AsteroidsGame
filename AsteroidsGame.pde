@@ -2,10 +2,40 @@ SpaceShip oct = new SpaceShip();
 public void setup() 
 {
   size(500,500);
+
 }
+   public void keyPressed()
+    {
+      if (key == 'a')
+      {
+        oct.rotate(-10);
+      }
+      if (key == 'd')
+      {    
+      oct.rotate(10);
+      }
+      if (key == 'w')
+      {
+        oct.accelerate(.5);
+      }
+      if (key == 's')
+      {
+        oct.accelerate(-.5);
+      }
+      if (key == 'f')
+      {
+        oct.setPointDirection((int)(Math.random()*360));
+        oct.setDirectionX(0);
+        oct.setDirectionY(0);
+        oct.setX((int)(Math.random()*500));
+        oct.setY((int)(Math.random()*500));
+      }
+    }
 public void draw() 
 {
+  background(255);
   oct.show();
+  oct.move();
 }
 class SpaceShip extends Floater  
 {   
@@ -25,8 +55,8 @@ class SpaceShip extends Floater
     xCorners = new int[corners];
     yCorners = new int[corners];
     
-    xCorners[0]= -8;
-    yCorners[0]= -4;
+    xCorners[0]= -10;
+    yCorners[0]= -3;
     
     xCorners[1]= -4;
     yCorners[1]= -10;
@@ -43,16 +73,17 @@ class SpaceShip extends Floater
     xCorners[5]= -4;
     yCorners[5]=  10;
     
-    xCorners[6]= -8;
-    yCorners[6]=  4;
+    xCorners[6]= -10;
+    yCorners[6]=  3;
    
     myCenterX=250;
     myCenterY=250;
-    myDirectionX=2;
-    myDirectionY=3;
+    myDirectionX=0;
+    myDirectionY=0;
     myPointDirection=0;
     }
     
+ 
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
