@@ -1,4 +1,8 @@
 SpaceShip oct = new SpaceShip();
+boolean wIsPressed=false;
+boolean aIsPressed=false;
+boolean sIsPressed=false;
+boolean dIsPressed=false;
 public void setup() 
 {
   size(500,500);
@@ -8,19 +12,19 @@ public void setup()
     {
       if (key == 'a')
       {
-        oct.rotate(-10);
+        aIsPressed=true;
       }
       if (key == 'd')
       {    
-      oct.rotate(10);
+        dIsPressed=true;
       }
       if (key == 'w')
       {
-        oct.accelerate(.5);
+        wIsPressed=true; //oct.accelerate(.5);
       }
       if (key == 's')
       {
-        oct.accelerate(-.5);
+        sIsPressed=true;
       }
       if (key == 'f')
       {
@@ -31,9 +35,74 @@ public void setup()
         oct.setY((int)(Math.random()*500));
       }
     }
+   public void keyReleased()
+    {
+      if (key == 'a')
+      {
+        aIsPressed=false;
+      }
+      if (key == 'd')
+      {    
+        dIsPressed=false;
+      }
+      if (key == 'w')
+      {
+        wIsPressed=false; //oct.accelerate(.5);
+      }
+      if (key == 's')
+      {
+        sIsPressed=false;
+      }
+
+    }
 public void draw() 
 {
   background(255);
+
+  if(wIsPressed==true && dIsPressed==true)
+  {
+    oct.accelerate(.25);
+    oct.rotate(5);
+  }
+
+  if(wIsPressed==true && aIsPressed==true)
+  {
+    oct.accelerate(.25);
+    oct.rotate(-5);
+  }
+
+  if(sIsPressed==true && aIsPressed==true)
+  {
+    oct.accelerate(-.25);
+    oct.rotate(-5);
+  }
+
+  if(sIsPressed==true && dIsPressed==true)
+  {
+    oct.accelerate(-.25);
+    oct.rotate(5);
+  }
+  if(wIsPressed==true)
+  {
+    oct.accelerate(.25);
+  }
+  if(sIsPressed==true)
+  {
+    oct.accelerate(-.25);
+  }
+  if(dIsPressed==true)
+  {
+    oct.rotate(5);
+  }
+  if(aIsPressed==true)
+  {
+    oct.rotate(-5);
+  }
+
+
+
+
+
   oct.show();
   oct.move();
 }
@@ -50,7 +119,7 @@ class SpaceShip extends Floater
     public double getDirectionY(){return myDirectionY;} 
     public void setPointDirection(int degrees){myPointDirection=degrees;}
     public double getPointDirection(){return myPointDirection;} 
-    SpaceShip(){
+    public SpaceShip(){
     corners=7;
     xCorners = new int[corners];
     yCorners = new int[corners];
