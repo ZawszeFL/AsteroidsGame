@@ -3,9 +3,14 @@ boolean wIsPressed=false;
 boolean aIsPressed=false;
 boolean sIsPressed=false;
 boolean dIsPressed=false;
+Star[] stars = new Star[200];
 public void setup() 
 {
   size(500,500);
+  for(int i=0; i<200;i+=1)
+  {
+    stars[i]= new Star();
+  }
 
 }
    public void keyPressed()
@@ -57,7 +62,13 @@ public void setup()
     }
 public void draw() 
 {
-  background(255);
+  fill(0,0,0,150);
+  rect(0,0,510,510);
+
+    for(int i=0; i<200;i+=1)
+  {
+    stars[i].show();
+  }
 
   if(wIsPressed==true && dIsPressed==true)
   {
@@ -106,6 +117,23 @@ public void draw()
   oct.show();
   oct.move();
 }
+class Star 
+{
+  private int myX;
+  private int myY;
+  private int mySize;
+
+  public Star()
+  {
+    myX=(int)(Math.random()*500);
+    myY=(int)(Math.random()*500);
+    mySize=(int)(Math.random()*3);
+  }
+  public void show()
+  {
+    ellipse(myX,myY,mySize,mySize);
+  }
+}
 class SpaceShip extends Floater  
 {   
     public void setX(int x) {myCenterX=x;}
@@ -120,36 +148,55 @@ class SpaceShip extends Floater
     public void setPointDirection(int degrees){myPointDirection=degrees;}
     public double getPointDirection(){return myPointDirection;} 
     public SpaceShip(){
-    corners=7;
+    corners=9;
     xCorners = new int[corners];
     yCorners = new int[corners];
     
-    xCorners[0]= -10;
-    yCorners[0]= -3;
+    xCorners[0]= 2;
+    yCorners[0]= 0;
     
-    xCorners[1]= -4;
-    yCorners[1]= -10;
+    xCorners[1]= 0;
+    yCorners[1]= 1;
     
-    xCorners[2]=  12;
-    yCorners[2]= -10;
+    xCorners[2]=  0;
+    yCorners[2]=  12;
     
-    xCorners[3]= 24;
-    yCorners[3]=  0;
+    xCorners[3]= 12;
+    yCorners[3]=  12;
    
     xCorners[4]=  12;
-    yCorners[4]=  10;
+    yCorners[4]=  13;
    
-    xCorners[5]= -4;
-    yCorners[5]=  10;
+    xCorners[5]= -6;
+    yCorners[5]=  13;
     
-    xCorners[6]= -10;
-    yCorners[6]=  3;
+    xCorners[6]= -6;
+    yCorners[6]=  12;
+
+    xCorners[7]= 2;
+    yCorners[7]= 0;
+    xCorners[8]= 0;
+    yCorners[8]= 1;
+    xCorners[9]=  0;
+    yCorners[9]=  12;   
+    xCorners[10]= 12;
+    yCorners[10]=  12;
+    xCorners[11]=  12;
+    yCorners[11]=  13;
+    xCorners[12]= -6;
+    yCorners[12]=  13;
+    xCorners[13]= -6;
+    yCorners[13]=  12;
+
+
+
    
     myCenterX=250;
     myCenterY=250;
     myDirectionX=0;
     myDirectionY=0;
     myPointDirection=0;
+    myColor=color(255,255,255);
     }
     
  
