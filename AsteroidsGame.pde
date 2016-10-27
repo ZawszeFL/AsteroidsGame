@@ -3,11 +3,11 @@ boolean wIsPressed=false;
 boolean aIsPressed=false;
 boolean sIsPressed=false;
 boolean dIsPressed=false;
-Star[] stars = new Star[200];
+Star[] stars = new Star[300];
 public void setup() 
 {
-  size(500,500);
-  for(int i=0; i<200;i+=1)
+  size(1000,1000);
+  for(int i=0; i<300;i+=1)
   {
     stars[i]= new Star();
   }
@@ -63,7 +63,7 @@ public void setup()
 public void draw() 
 {
   fill(0,0,0,150);
-  rect(0,0,510,510);
+  rect(0,0,1010,1010);
 
     for(int i=0; i<200;i+=1)
   {
@@ -73,25 +73,25 @@ public void draw()
   if(wIsPressed==true && dIsPressed==true)
   {
     oct.accelerate(.25);
-    oct.rotate(5);
+    oct.rotate(3);
   }
 
   if(wIsPressed==true && aIsPressed==true)
   {
     oct.accelerate(.25);
-    oct.rotate(-5);
+    oct.rotate(-3);
   }
 
   if(sIsPressed==true && aIsPressed==true)
   {
     oct.accelerate(-.25);
-    oct.rotate(-5);
+    oct.rotate(-3);
   }
 
   if(sIsPressed==true && dIsPressed==true)
   {
     oct.accelerate(-.25);
-    oct.rotate(5);
+    oct.rotate(3);
   }
   if(wIsPressed==true)
   {
@@ -103,11 +103,11 @@ public void draw()
   }
   if(dIsPressed==true)
   {
-    oct.rotate(5);
+    oct.rotate(3);
   }
   if(aIsPressed==true)
   {
-    oct.rotate(-5);
+    oct.rotate(-3);
   }
 
 
@@ -125,8 +125,8 @@ class Star
 
   public Star()
   {
-    myX=(int)(Math.random()*500);
-    myY=(int)(Math.random()*500);
+    myX=(int)(Math.random()*1000);
+    myY=(int)(Math.random()*1000);
     mySize=(int)(Math.random()*3);
   }
   public void show()
@@ -148,7 +148,7 @@ class SpaceShip extends Floater
     public void setPointDirection(int degrees){myPointDirection=degrees;}
     public double getPointDirection(){return myPointDirection;} 
     public SpaceShip(){
-    corners=9;
+    corners=21;
     xCorners = new int[corners];
     yCorners = new int[corners];
     
@@ -156,37 +156,58 @@ class SpaceShip extends Floater
     yCorners[0]= 0;
     
     xCorners[1]= 0;
-    yCorners[1]= 1;
+    yCorners[1]=  -1;
     
     xCorners[2]=  0;
-    yCorners[2]=  12;
+    yCorners[2]=  -12;
     
     xCorners[3]= 12;
-    yCorners[3]=  12;
+    yCorners[3]=  -12;
    
     xCorners[4]=  12;
-    yCorners[4]=  13;
+    yCorners[4]=  -13;
    
     xCorners[5]= -6;
-    yCorners[5]=  13;
+    yCorners[5]=  -13;
     
     xCorners[6]= -6;
-    yCorners[6]=  12;
+    yCorners[6]=  -12;
 
-    xCorners[7]= 2;
-    yCorners[7]= 0;
+    xCorners[7]= 0;
+    yCorners[7]= -12;
+
     xCorners[8]= 0;
-    yCorners[8]= 1;
-    xCorners[9]=  0;
-    yCorners[9]=  12;   
-    xCorners[10]= 12;
-    yCorners[10]=  12;
-    xCorners[11]=  12;
-    yCorners[11]=  13;
-    xCorners[12]= -6;
-    yCorners[12]=  13;
+    yCorners[8]= -1;
+
+    xCorners[9]=  -1;
+    yCorners[9]=  -1;   
+   
+    xCorners[10]= -1;
+    yCorners[10]=  1;
+    xCorners[11]=  0;
+    yCorners[11]=  1;
+    xCorners[12]= 0;
+    yCorners[12]=  12;
     xCorners[13]= -6;
     yCorners[13]=  12;
+
+    xCorners[14]= -6;
+    yCorners[14]=  13;
+    xCorners[15]=  12;
+    yCorners[15]=  13;
+    xCorners[16]= 12;
+    yCorners[16]=  12;
+    xCorners[17]= 0;
+    yCorners[17]=  12;
+
+    xCorners[18]= 0;
+    yCorners[18]=  1;
+    xCorners[19]=  1;
+    yCorners[19]=  1;
+    xCorners[20]= 2;
+    yCorners[20]=  0;
+
+
 
 
 
