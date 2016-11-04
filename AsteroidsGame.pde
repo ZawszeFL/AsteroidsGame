@@ -1,4 +1,5 @@
 SpaceShip oct = new SpaceShip();
+Asteroids[] rocks = new Asteroids[20];
 boolean wIsPressed=false;
 boolean aIsPressed=false;
 boolean sIsPressed=false;
@@ -10,7 +11,10 @@ public void setup()
   for(int i=0; i<300;i+=1)
   {
     stars[i]= new Star();
+    for(int j=0; j<rocks.length;j++)
+      rocks[j]=new Asteroids();
   }
+
 
 }
    public void keyPressed()
@@ -72,34 +76,34 @@ public void draw()
 
   if(wIsPressed==true && dIsPressed==true)
   {
-    oct.accelerate(.25);
+    oct.accelerate(.125);
     oct.rotate(3);
   }
 
   if(wIsPressed==true && aIsPressed==true)
   {
-    oct.accelerate(.25);
+    oct.accelerate(.125);
     oct.rotate(-3);
   }
 
   if(sIsPressed==true && aIsPressed==true)
   {
-    oct.accelerate(-.25);
+    oct.accelerate(-.125);
     oct.rotate(-3);
   }
 
   if(sIsPressed==true && dIsPressed==true)
   {
-    oct.accelerate(-.25);
+    oct.accelerate(-.125);
     oct.rotate(3);
   }
   if(wIsPressed==true)
   {
-    oct.accelerate(.25);
+    oct.accelerate(.125);
   }
   if(sIsPressed==true)
   {
-    oct.accelerate(-.25);
+    oct.accelerate(-.125);
   }
   if(dIsPressed==true)
   {
@@ -112,28 +116,108 @@ public void draw()
 
 
 
-
-
+  for(int i=0; i<300;i+=1)
+  {
+    stars[i].show();
+    
+  }
+  for(int r=0; r<rocks.length;r++){
+      rocks[r].show();
+      rocks[r].move();
+    }
   oct.show();
   oct.move();
 }
-class Star 
+class Asteroids extends Floater
 {
-  private int myX;
-  private int myY;
-  private int mySize;
+  public void setX(int x) {myCenterX=x;}
+  public int getX(){return (int)myCenterX;}  
+  public void setY(int y){myCenterY=y;} 
+  public int getY(){return (int)myCenterY;} 
+
+  public void setDirectionX(double x){myDirectionX=x;}  
+  public double getDirectionX(){return myDirectionX;} 
+  public void setDirectionY(double y){myDirectionY=y;}
+  public double getDirectionY(){return myDirectionY;} 
+  public void setPointDirection(int degrees){myPointDirection=degrees;}
+  public double getPointDirection(){return myPointDirection;} 
+
+  private int rotSpeed; 
+  public Asteroids() 
+  {
+
+    corners=7;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    
+    xCorners[0]= -14;
+    yCorners[0]= 0;
+    
+    xCorners[1]= -8;
+    yCorners[1]=  -10;
+    
+    xCorners[2]=  0;
+    yCorners[2]=  -12;
+    
+    xCorners[3]= 8;
+    yCorners[3]= -8;
+   
+    xCorners[4]=  12;
+    yCorners[4]=  6;
+
+
+    xCorners[5]=  8;
+    yCorners[5]=  12;
+
+    xCorners[6]=  -6;
+    yCorners[6]=  10;
+
+
+    myCenterX=(int)(Math.random()*900);
+    myCenterY=(int)(Math.random()*900);
+    myDirectionX=(int)(Math.random()*3)-2;
+    myDirectionY=(int)(Math.random()*3)-2;
+    myPointDirection=0;
+    myColor=color(127);
+    rotSpeed=(int)(Math.random()*5)-3;
+  }
+  public void move(){
+    super.move();
+    rotate(rotSpeed);
+
+  }
+
+}
+
+class Star extends Floater
+{
+  public void setX(int x) {myCenterX=x;}
+  public int getX(){return (int)myCenterX;}  
+  public void setY(int y){myCenterY=y;} 
+  public int getY(){return (int)myCenterY;} 
+
+  public void setDirectionX(double x){myDirectionX=x;}  
+  public double getDirectionX(){return myDirectionX;} 
+  public void setDirectionY(double y){myDirectionY=y;}
+  public double getDirectionY(){return myDirectionY;} 
+  public void setPointDirection(int degrees){myPointDirection=degrees;}
+  public double getPointDirection(){return myPointDirection;} 
 
   public Star()
   {
-    myX=(int)(Math.random()*1000);
-    myY=(int)(Math.random()*1000);
-    mySize=(int)(Math.random()*3);
+    myCenterX=(int)(Math.random()*1000);
+    myCenterY=(int)(Math.random()*1000);
+
+    myPointDirection=0;
+    myColor=color(255);
+
   }
   public void show()
   {
-    ellipse(myX,myY,mySize,mySize);
+    ellipse((int)myCenterX,(int)myCenterY,3,3);
   }
 }
+
 class SpaceShip extends Floater  
 {   
     public void setX(int x) {myCenterX=x;}
@@ -207,11 +291,7 @@ class SpaceShip extends Floater
     xCorners[20]= 2;
     yCorners[20]=  0;
 
-
-
-
-
-   
+  
     myCenterX=250;
     myCenterY=250;
     myDirectionX=0;
