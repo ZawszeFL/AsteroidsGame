@@ -1,5 +1,8 @@
 SpaceShip oct = new SpaceShip();
-Asteroids[] rocks = new Asteroids[20];
+//Asteroids[] rocks = new Asteroids[20];
+ArrayList<Asteroids> rocks =new ArrayList<Asteroids>();
+//Asteroids [] rocks = new Asteroids[10];
+
 boolean wIsPressed=false;
 boolean aIsPressed=false;
 boolean sIsPressed=false;
@@ -11,9 +14,13 @@ public void setup()
   for(int i=0; i<300;i+=1)
   {
     stars[i]= new Star();
-    for(int j=0; j<rocks.length;j++)
-      rocks[j]=new Asteroids();
+
   }
+  for(int j=0; j<10;j++)
+  {
+     rocks.add(j, new Asteroids());
+  }
+  
 
 
 }
@@ -40,8 +47,8 @@ public void setup()
         oct.setPointDirection((int)(Math.random()*360));
         oct.setDirectionX(0);
         oct.setDirectionY(0);
-        oct.setX((int)(Math.random()*500));
-        oct.setY((int)(Math.random()*500));
+        oct.setX((int)(Math.random()*900+50));  
+        oct.setY((int)(Math.random()*900+50));
       }
     }
    public void keyReleased()
@@ -121,10 +128,11 @@ public void draw()
     stars[i].show();
     
   }
-  for(int r=0; r<rocks.length;r++){
-      rocks[r].show();
-      rocks[r].move();
-    }
+  for(int j=0; j<10;j++)
+  {
+     rocks.get(j).show();
+     rocks.get(j).move();
+  }
   oct.show();
   oct.move();
 }
