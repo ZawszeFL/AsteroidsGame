@@ -16,7 +16,7 @@ public void setup()
     stars[i]= new Star();
 
   }
-  for(int j=0; j<10;j++)
+  for(int j=0; j<30;j++)
   {
      rocks.add(j, new Asteroids());
   }
@@ -128,10 +128,12 @@ public void draw()
     stars[i].show();
     
   }
-  for(int j=0; j<10;j++)
+  for(int j=0; j<rocks.size();j++)
   {
      rocks.get(j).show();
      rocks.get(j).move();
+     if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+      rocks.remove(j);
   }
   oct.show();
   oct.move();
@@ -183,8 +185,8 @@ class Asteroids extends Floater
 
     myCenterX=(int)(Math.random()*900);
     myCenterY=(int)(Math.random()*900);
-    myDirectionX=(int)(Math.random()*3)-2;
-    myDirectionY=(int)(Math.random()*3)-2;
+    myDirectionX=(float)(Math.random()*4)-2;
+    myDirectionY=(float)(Math.random()*4)-2;
     myPointDirection=0;
     myColor=color(127);
     rotSpeed=(int)(Math.random()*5)-3;
