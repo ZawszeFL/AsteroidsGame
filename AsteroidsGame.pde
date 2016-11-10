@@ -1,6 +1,7 @@
 SpaceShip oct = new SpaceShip();
 //Asteroids[] rocks = new Asteroids[20];
 ArrayList<Asteroids> rocks =new ArrayList<Asteroids>();
+ArrayList<Bullet> pews=new ArrayList<Bullet>();
 //Asteroids [] rocks = new Asteroids[10];
 
 boolean wIsPressed=false;
@@ -20,7 +21,7 @@ public void setup()
   {
      rocks.add(j, new Asteroids());
   }
-  
+  pews.add(new Bullet(oct));
 
 
 }
@@ -84,25 +85,25 @@ public void draw()
   if(wIsPressed==true && dIsPressed==true)
   {
     oct.accelerate(.125);
-    oct.rotate(3);
+    oct.rotate(1);
   }
 
   if(wIsPressed==true && aIsPressed==true)
   {
     oct.accelerate(.125);
-    oct.rotate(-3);
+    oct.rotate(-1);
   }
 
   if(sIsPressed==true && aIsPressed==true)
   {
     oct.accelerate(-.125);
-    oct.rotate(-3);
+    oct.rotate(-1);
   }
 
   if(sIsPressed==true && dIsPressed==true)
   {
     oct.accelerate(-.125);
-    oct.rotate(3);
+    oct.rotate(1);
   }
   if(wIsPressed==true)
   {
@@ -138,6 +139,37 @@ public void draw()
   oct.show();
   oct.move();
 }
+
+class Bullet extends Floater
+{
+  public void setX(int x) {myCenterX=x;}
+  public int getX(){return (int)myCenterX;}  
+  public void setY(int y){myCenterY=y;} 
+  public int getY(){return (int)myCenterY;} 
+
+  public void setDirectionX(double x){myDirectionX=x;}  
+  public double getDirectionX(){return myDirectionX;} 
+  public void setDirectionY(double y){myDirectionY=y;}
+  public double getDirectionY(){return myDirectionY;} 
+  public void setPointDirection(int degrees){myPointDirection=degrees;}
+  public double getPointDirection(){return myPointDirection;} 
+
+  public Bullet(SpaceShip theShip)
+  {
+    myCenterX=oct.getX();
+    myCenterY=oct.getY();
+    myPointDirection=oct.getPointDirection();
+    double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX=5*Math.cos(dRadians)+oct.getDirectionX();
+    myDirectionY=5*Math.sin(dRadians)+oct.getDirectionX();
+  }
+  public void show(){
+    fill(255,255,255);
+    ellipse((double)myCenterX,(double)myCenterY,(int)5,(int)5);
+  }
+
+}
+  
 class Asteroids extends Floater
 {
   public void setX(int x) {myCenterX=x;}
