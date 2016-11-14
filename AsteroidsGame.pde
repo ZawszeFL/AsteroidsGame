@@ -2,6 +2,7 @@ SpaceShip oct = new SpaceShip();
 //Asteroids[] rocks = new Asteroids[20];
 ArrayList<Asteroids> rocks =new ArrayList<Asteroids>();
 ArrayList<Bullet> pews=new ArrayList<Bullet>();
+
 //Asteroids [] rocks = new Asteroids[10];
 
 boolean wIsPressed=false;
@@ -21,7 +22,11 @@ public void setup()
   {
      rocks.add(j, new Asteroids());
   }
-  pews.add(new Bullet(oct));
+  
+    for(int k=0; k<50;k++)
+  {
+     pews.add(k,new Bullet(oct));
+  }
 
 
 }
@@ -136,8 +141,14 @@ public void draw()
      if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
       rocks.remove(j);
   }
+  for(int k=0; k<pews.size();k++)
+  {
+  pews.get(k).show();
+  pews.get(k).move();
+  }
   oct.show();
   oct.move();
+
 }
 
 class Bullet extends Floater
@@ -165,7 +176,7 @@ class Bullet extends Floater
   }
   public void show(){
     fill(255,255,255);
-    ellipse((double)myCenterX,(double)myCenterY,(int)5,(int)5);
+    ellipse((float)myCenterX,(float)myCenterY,(int)5,(int)5);
   }
 
 }
