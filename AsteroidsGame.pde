@@ -208,10 +208,18 @@ class Bullet extends Floater
   public void show(){
     
     fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-    ellipse((float)myCenterX,(float)myCenterY,(int)15,(int)5);
-  }
+    ellipse((float)myCenterX,(float)myCenterY,10*(float)Math.sin(oct.getPointDirection()),10*(float)Math.cos(oct.getPointDirection()));//3*(float)myDirectionX,3*(float)myDirectionY);  }
+
+}
+ public void move ()   //move the floater in the current direction of travel
+  {      
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
 
 
+    
+  }   
 }
   
 class Asteroids extends Floater
