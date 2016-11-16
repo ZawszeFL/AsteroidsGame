@@ -11,6 +11,7 @@
 boolean dIsPressed=false;
 boolean spaceIsPressed=false;
 Star[] stars = new Star[300];
+int score=0;
 public void setup() 
 {
   size(1000,1000);
@@ -25,7 +26,7 @@ public void setup()
      rocks.add(j, new Asteroids());
   }
   
-
+  
 
 }
    public void keyPressed()
@@ -149,7 +150,6 @@ public void draw()
 
 
 
-
   for(int i=0; i<300;i+=1)
   {
     stars[i].show();
@@ -157,10 +157,35 @@ public void draw()
   }
   for(int j=0; j<rocks.size();j++)
   {
-     rocks.get(j).show();
-     rocks.get(j).move();
-     //if(dist(pews.get(k).getX(),pews.get(k).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
-     // rocks.remove(j);
+    for(int k=0; k<pews.size();k++)
+  {
+       if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+    {
+      oct.remove();
+    }
+
+    if(dist(pews.get(k).getX(),pews.get(k).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+    {
+      rocks.remove(j);
+      pews.remove(k);
+      score++;
+      break;
+    }
+    if(rocks.size()==29)
+      rocks.add(new Asteroids());
+
+  }
+
+  }
+   for(int j=0; j<rocks.size();j++)
+  {
+    rocks.get(j).show();
+    rocks.get(j).move();
+  }
+ for(int k=0; k<pews.size();k++)
+  {
+      pews.get(k).show();
+    pews.get(k).move();
   }
   for(int k=0; k<pews.size();k++)
   {
@@ -173,8 +198,9 @@ public void draw()
   oct.move();
 
 
-
-
+fill(255);
+textSize(20);
+text("Score: "+score,10,30);
 
 
 }
@@ -208,7 +234,7 @@ class Bullet extends Floater
   public void show(){
     
     fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-    ellipse((float)myCenterX,(float)myCenterY,10*(float)Math.sin(oct.getPointDirection()),10*(float)Math.cos(oct.getPointDirection()));//3*(float)myDirectionX,3*(float)myDirectionY);  }
+    ellipse((float)myCenterX,(float)myCenterY,10,10);//10*(float)Math.sin(oct.getPointDirection()),10*(float)Math.cos(oct.getPointDirection()));//3*(float)myDirectionX,3*(float)myDirectionY);  }
 
 }
  public void move ()   //move the floater in the current direction of travel
@@ -216,6 +242,22 @@ class Bullet extends Floater
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
+    /*if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }  */
 
 
     
