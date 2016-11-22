@@ -159,10 +159,10 @@ public void draw()
   {
     for(int k=0; k<pews.size();k++)
   {
-       if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
-    {
-      oct.remove();
-    }
+       //if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+    //{
+     // oct.remove();
+  //  }
 
     if(dist(pews.get(k).getX(),pews.get(k).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
     {
@@ -358,7 +358,7 @@ class Star extends Floater
     myCenterY=(int)(Math.random()*1000);
 
 
-    myPointDirection=0;
+    myPointDirection=1;
     myColor=color(255);
 
 
