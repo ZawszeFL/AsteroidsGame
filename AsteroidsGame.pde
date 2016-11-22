@@ -89,7 +89,8 @@ public void draw()
 {
   fill(0,0,0,150);
   rect(0,0,1010,1010);
-
+  System.out.println(pews.size());
+  System.out.println(oct.getX());
 
     for(int i=0; i<200;i+=1)
   {
@@ -159,10 +160,11 @@ public void draw()
   {
     for(int k=0; k<pews.size();k++)
   {
-       //if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
-    //{
-     // oct.remove();
-  //  }
+       if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+        {
+          oct.setX(10000);
+          oct.setY(10000);
+        }
 
     if(dist(pews.get(k).getX(),pews.get(k).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
     {
@@ -234,7 +236,7 @@ class Bullet extends Floater
   public void show(){
     
     fill((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
-    ellipse((float)myCenterX,(float)myCenterY,10,10);//10*(float)Math.sin(oct.getPointDirection()),10*(float)Math.cos(oct.getPointDirection()));//3*(float)myDirectionX,3*(float)myDirectionY);  }
+    ellipse((float)myCenterX,(float)myCenterY,10,10);
 
 }
  public void move ()   //move the floater in the current direction of travel
@@ -242,22 +244,25 @@ class Bullet extends Floater
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
-    /*if(myCenterX >width)
+    if(myCenterX >width)
     {     
-      myCenterX = 0;    
+      pews.remove(this);  
     }    
     else if (myCenterX<0)
     {     
-      myCenterX = width;    
+      pews.remove(this);  
+   
     }    
     if(myCenterY >height)
     {    
-      myCenterY = 0;    
+      pews.remove(this);  
+   
     }   
     else if (myCenterY < 0)
     {     
-      myCenterY = height;    
-    }  */
+      pews.remove(this);  
+    
+    }  
 
 
     
