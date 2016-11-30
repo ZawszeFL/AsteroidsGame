@@ -105,8 +105,7 @@ public void draw()
 
   fill(0,0,0,150);
   rect(0,0,1010,1010);
-  System.out.println(pews.size());
-  System.out.println(oct.get(0).getX());
+
 
     for(int i=0; i<200;i+=1)
   {
