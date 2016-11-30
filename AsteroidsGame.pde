@@ -1,9 +1,10 @@
-  SpaceShip oct = new SpaceShip();
+  //SpaceShip oct = new SpaceShip();
+  ArrayList<SpaceShip> oct = new ArrayList<SpaceShip>();
   //Asteroids[] rocks = new Asteroids[20];
   ArrayList<Asteroids> rocks =new ArrayList<Asteroids>();
   ArrayList<Bullet> pews=new ArrayList<Bullet>();
   //Asteroids [] rocks = new Asteroids[10];
-
+  boolean gameOver=false;
 
   boolean wIsPressed=false;
   boolean aIsPressed=false;
@@ -14,6 +15,8 @@ Star[] stars = new Star[300];
 int score=0;
 public void setup() 
 {
+
+  oct.add(new SpaceShip());
   size(1000,1000);
   for(int i=0; i<300;i+=1)
   {
@@ -41,7 +44,7 @@ public void setup()
       }
       if (key == 'w')
       {
-        wIsPressed=true; //oct.accelerate(.5);
+        wIsPressed=true; 
       }
       if (key == 's')
       {
@@ -53,11 +56,11 @@ public void setup()
       }
       if (key == 'f')
       {
-        oct.setPointDirection((int)(Math.random()*360));
-        oct.setDirectionX(0);
-        oct.setDirectionY(0);
-        oct.setX((int)(Math.random()*900+50));  
-        oct.setY((int)(Math.random()*900+50));
+        oct.get(0).setPointDirection((int)(Math.random()*360));
+        oct.get(0).setDirectionX(0);
+        oct.get(0).setDirectionY(0);
+        oct.get(0).setX((int)(Math.random()*900+50));  
+        oct.get(0).setY((int)(Math.random()*900+50));
       }
     }
    public void keyReleased()
@@ -72,7 +75,7 @@ public void setup()
       }
       if (key == 'w')
       {
-        wIsPressed=false; //oct.accelerate(.5);
+        wIsPressed=false; 
       }
       if (key == 's')
       {
@@ -87,10 +90,23 @@ public void setup()
     }
 public void draw() 
 {
+
+  if(gameOver==true)
+  {
+    background(0);
+    
+          fill(255);
+          textSize(50);
+          textAlign(CENTER);
+          text("GAME OVER",500,300);
+          text("Score: "+score,500,700);
+  }
+  else{
+
   fill(0,0,0,150);
   rect(0,0,1010,1010);
   System.out.println(pews.size());
-  System.out.println(oct.getX());
+  System.out.println(oct.get(0).getX());
 
     for(int i=0; i<200;i+=1)
   {
@@ -100,50 +116,50 @@ public void draw()
 
   if(wIsPressed==true && dIsPressed==true)
   {
-    oct.accelerate(.125);
-    oct.rotate(1);
+    oct.get(0).accelerate(.125);
+    oct.get(0).rotate(1);
   }
 
 
   if(wIsPressed==true && aIsPressed==true)
   {
-    oct.accelerate(.125);
-    oct.rotate(-1);
+    oct.get(0).accelerate(.125);
+    oct.get(0).rotate(-1);
   }
 
 
   if(sIsPressed==true && aIsPressed==true)
   {
-    oct.accelerate(-.125);
-    oct.rotate(-1);
+    oct.get(0).accelerate(-.125);
+    oct.get(0).rotate(-1);
   }
 
 
   if(sIsPressed==true && dIsPressed==true)
   {
-    oct.accelerate(-.125);
-    oct.rotate(1);
+    oct.get(0).accelerate(-.125);
+    oct.get(0).rotate(1);
   }
   if(wIsPressed==true)
   {
-    oct.accelerate(.125);
+    oct.get(0).accelerate(.125);
   }
   if(sIsPressed==true)
   {
-    oct.accelerate(-.125);
+    oct.get(0).accelerate(-.125);
   }
   if(dIsPressed==true)
   {
-    oct.rotate(3);
+    oct.get(0).rotate(3);
   }
   if(aIsPressed==true)
   {
-    oct.rotate(-3);
+    oct.get(0).rotate(-3);
   }
   if(spaceIsPressed==true)
   {
-    pews.add(new Bullet(oct));
-
+    pews.add(new Bullet(oct.get(0)));
+    
 
   }
 
@@ -158,13 +174,17 @@ public void draw()
   }
   for(int j=0; j<rocks.size();j++)
   {
+      if(dist(oct.get(0).getX(),oct.get(0).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
+        {
+          fill(0);
+          gameOver=true;
+          
+
+
+        }
     for(int k=0; k<pews.size();k++)
   {
-       if(dist(oct.getX(),oct.getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
-        {
-          oct.setX(10000);
-          oct.setY(10000);
-        }
+     
 
     if(dist(pews.get(k).getX(),pews.get(k).getY(),rocks.get(j).getX(),rocks.get(j).getY())<25)
     {
@@ -196,15 +216,15 @@ public void draw()
   }
 
 
-  oct.show();
-  oct.move();
+  oct.get(0).show();
+  oct.get(0).move();
 
 
 fill(255);
 textSize(20);
 text("Score: "+score,10,30);
 
-
+}
 }
 
 
@@ -226,12 +246,12 @@ class Bullet extends Floater
 
   public Bullet(SpaceShip theShip)
   {
-    myCenterX=oct.getX();
-    myCenterY=oct.getY();
-    myPointDirection=oct.getPointDirection();
+    myCenterX=oct.get(0).getX();
+    myCenterY=oct.get(0).getY();
+    myPointDirection=oct.get(0).getPointDirection();
     double dRadians =myPointDirection*(Math.PI/180);
-    myDirectionX=5*Math.cos(dRadians)+oct.getDirectionX();
-    myDirectionY=5*Math.sin(dRadians)+oct.getDirectionX();
+    myDirectionX=5*Math.cos(dRadians)+oct.get(0).getDirectionX();
+    myDirectionY=5*Math.sin(dRadians)+oct.get(0).getDirectionX();
   }
   public void show(){
     
