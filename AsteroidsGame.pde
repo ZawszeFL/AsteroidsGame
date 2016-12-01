@@ -102,7 +102,10 @@ public void draw()
           textSize(50);
           textAlign(CENTER);
           text("GAME OVER",500,300);
-          text("Score: "+score,500,700);
+          text("Score: "+score,500,600);
+          textSize(20);
+          text("(refresh page to play again)",500,900);
+
   }
   
 
@@ -484,8 +487,8 @@ class SpaceShip extends Floater
 
 
   
-    myCenterX=250;
-    myCenterY=250;
+    myCenterX=500;
+    myCenterY=500;
     myDirectionX=0;
     myDirectionY=0;
     myPointDirection=0;
