@@ -4,7 +4,9 @@
   ArrayList<Asteroids> rocks =new ArrayList<Asteroids>();
   ArrayList<Bullet> pews=new ArrayList<Bullet>();
   //Asteroids [] rocks = new Asteroids[10];
+  int shoot=0;
   boolean gameOver=false;
+  boolean restart=false;
 
   boolean wIsPressed=false;
   boolean aIsPressed=false;
@@ -24,7 +26,7 @@ public void setup()
 
 
   }
-  for(int j=0; j<30;j++)
+  for(int j=0; j<50;j++)
   {
      rocks.add(j, new Asteroids());
   }
@@ -62,6 +64,7 @@ public void setup()
         oct.get(0).setX((int)(Math.random()*900+50));  
         oct.get(0).setY((int)(Math.random()*900+50));
       }
+
     }
    public void keyReleased()
     {
@@ -101,6 +104,8 @@ public void draw()
           text("GAME OVER",500,300);
           text("Score: "+score,500,700);
   }
+  
+
   else{
 
   fill(0,0,0,150);
@@ -116,28 +121,28 @@ public void draw()
   if(wIsPressed==true && dIsPressed==true)
   {
     oct.get(0).accelerate(.125);
-    oct.get(0).rotate(1);
+    oct.get(0).rotate(5);
   }
 
 
   if(wIsPressed==true && aIsPressed==true)
   {
     oct.get(0).accelerate(.125);
-    oct.get(0).rotate(-1);
+    oct.get(0).rotate(-5);
   }
 
 
   if(sIsPressed==true && aIsPressed==true)
   {
     oct.get(0).accelerate(-.125);
-    oct.get(0).rotate(-1);
+    oct.get(0).rotate(-5);
   }
 
 
   if(sIsPressed==true && dIsPressed==true)
   {
     oct.get(0).accelerate(-.125);
-    oct.get(0).rotate(1);
+    oct.get(0).rotate(5);
   }
   if(wIsPressed==true)
   {
@@ -149,19 +154,24 @@ public void draw()
   }
   if(dIsPressed==true)
   {
-    oct.get(0).rotate(3);
+    oct.get(0).rotate(5);
   }
   if(aIsPressed==true)
   {
-    oct.get(0).rotate(-3);
+    oct.get(0).rotate(-5);
   }
   if(spaceIsPressed==true)
   {
-    pews.add(new Bullet(oct.get(0)));
+    shoot+=1;
+    
     
 
   }
-
+if(shoot>5)
+{
+  pews.add(new Bullet(oct.get(0)));
+  shoot=0;
+}
 
 
 
@@ -192,7 +202,7 @@ public void draw()
       score++;
       break;
     }
-    if(rocks.size()==29)
+    if(rocks.size()==48)
       rocks.add(new Asteroids());
 
   }
@@ -225,7 +235,6 @@ text("Score: "+score,10,30);
 
 }
 }
-
 
 class Bullet extends Floater
 {
